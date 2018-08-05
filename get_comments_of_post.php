@@ -1,5 +1,5 @@
 <?php
-    //2018-08-05 00:03:38
+    //2018-08-05 07:22:21
     set_time_limit(0);
     error_reporting(0);
     $post_id = '';
@@ -18,6 +18,3 @@
     curl_close($ch);
 
     print_r($response);
-
-    for ($i = 0; $i < count($response->data); $i++)
-        echo $response->data[$i]->from->id . ': ' . $response->data[$i]->message . PHP_EOL;
