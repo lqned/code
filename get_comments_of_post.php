@@ -1,5 +1,4 @@
 <?php
-    //2018-08-05 07:22:21
     set_time_limit(0);
     error_reporting(0);
     $post_id = '';
