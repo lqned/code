@@ -10,7 +10,7 @@
 
     curl_setopt_array($ch, array(
         CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => 'https://graph.facebook.com/' . $post_id . '/comments?limit=' . $limit . '&access_token=' . $token
+        CURLOPT_URL => "https://graph.facebook.com/$post_id/comments?limit=$limit&access_token=$token"
     ));
 
     $response = json_decode(curl_exec($ch));
