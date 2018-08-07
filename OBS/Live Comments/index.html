@@ -1,0 +1,70 @@
+<html>
+    <head></head>
+    <body>
+        <style>
+            img{
+                position: absolute;
+                top: 25px;
+                left: 20px;  
+            }
+            span{
+                position: relative;
+                top: 35px;
+                left: 75px;
+                color: #ffffff;
+                font-size: 25px;
+                font-family: "Consolas";
+            }
+            #name{
+                color: #8b9bf1;
+            }
+        </style>
+        <script>
+            var token = '',
+                video_id = '',
+                last = ''; //dont edit this
+            window.onload = function(){
+                getStreamid();
+            }
+            function getStreamid(){
+                var req = new XMLHttpRequest();
+                req.open('GET', 'https://graph.facebook.com/me?access_token=' + token);
+                req.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        video_id = JSON.parse(this.responseText).id + '_' + video_id;
+                        getComment('https://graph.facebook.com/' + video_id + '/comments?limit=1&access_token=' + token);
+                    }
+                }
+                req.send();
+            }
+
+            function getComment(url){
+                var req = new XMLHttpRequest();
+                req.open('GET', url);
+                req.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        var response = JSON.parse(this.responseText);
+                        if (response.data[0].id != last){
+                            last = response.data[0].id;
+                            document.getElementById('avatar').src = 'https://graph.facebook.com/' + response.data[0].from.id + '/picture';
+                            document.getElementById('name').innerText = response.data[0].from.name + ': ';
+                            document.getElementById('message').innerText = response.data[0].message;
+                        }
+                        setTimeout(
+                            function(){
+                                if (response.paging.next != undefined) getComment(response.paging.next);
+                                else getComment(url);
+                            }, 2000);
+                    }
+                }
+                req.send();
+
+            }
+        </script>
+        <div id="comment">
+            <img id="avatar" height="50px" width="50px">
+            <span id="name"></span>
+            <span id="message"></span>
+        </div>
+    </body>
+</html>

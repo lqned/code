@@ -1,0 +1,30 @@
+<html>
+    <head></head>
+    <body>
+        <style>
+            h1, span{
+                color: #ffffff;
+                font-size: 50px;
+                font-family: "Consolas";
+            }
+        </style>
+        <script>
+            function addZero(i){
+                if (i < 10)
+                    return '0' + i;
+                return i;
+            }
+            window.onload = function(){
+                var sec = 0;
+                setInterval(function(){
+                    sec++;
+                    var hour = Math.floor(sec/3600);
+                    var minute = Math.floor((sec - hour * 3600)/60);
+                    var second = Math.floor(sec - hour * 3600 - minute * 60);
+                    document.getElementById('time').innerText = addZero(hour) + ':' + addZero(minute) + ':' + addZero(second);
+                }, 1000);
+            }
+        </script>
+        <h1>Actived Time: <span id="time"></span></h1>
+    </body>
+</html>
