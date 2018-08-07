@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="s.css">
+    </head>
+    <body>
+        <script>
+            window.onload = function(){
+                setInterval(function(){
+                    var date = new Date();
+                    var a = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                    document.getElementById('dt').innerText = a[date.getDay() - 1] + ' ' + date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear() + ' | ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                }, 1000);
+            }
+        </script>
+        <h1 id="dt"></h1>
+    </body>
+</html>
